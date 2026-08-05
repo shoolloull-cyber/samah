@@ -167,8 +167,8 @@ export default function FlowerBurstScene() {
                     src="/assets/farida_photo1.jpg"
                     alt="Memory 1"
                     fill
+                    sizes="(max-width: 768px) 170px, 240px"
                     className="object-cover object-center"
-                    unoptimized
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
@@ -201,8 +201,8 @@ export default function FlowerBurstScene() {
                     src="/assets/farida_photo2.jpg"
                     alt="Memory 2"
                     fill
+                    sizes="(max-width: 768px) 170px, 240px"
                     className="object-cover object-center"
-                    unoptimized
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
@@ -234,8 +234,8 @@ export default function FlowerBurstScene() {
                     src="/assets/farida_photo3.jpg"
                     alt="Memory 3"
                     fill
+                    sizes="(max-width: 768px) 170px, 240px"
                     className="object-cover object-center"
-                    unoptimized
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
@@ -268,8 +268,8 @@ export default function FlowerBurstScene() {
                     src="/assets/farida_photo4.jpg"
                     alt="Memory 4"
                     fill
+                    sizes="(max-width: 768px) 170px, 240px"
                     className="object-cover object-center"
-                    unoptimized
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">

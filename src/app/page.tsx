@@ -20,34 +20,68 @@ export default function Home() {
     }
     window.scrollTo(0, 0);
 
-    // Preload only critical first-screen images (not heavy flower images)
-    const images = [
+    // Preload critical first-screen images for fast initial loader
+    const criticalImages = [
       "/assets/gift-box-before.png",
       "/assets/gift-box-after.png",
       "/assets/birthday-cat-hat.png",
       "/assets/white-plaid-bg.jpg",
     ];
 
+    // Preload remaining scene assets in background so scrolling is 100% instant
+    const secondaryImages = [
+      "/assets/flower1.png",
+      "/assets/flower2.png",
+      "/assets/flower3.png",
+      "/assets/red-paper-bg.jpg",
+      "/assets/cherries.png",
+      "/assets/flower-bouquet-deco.png",
+      "/assets/flower-camera.png",
+      "/assets/farida_photo1.jpg",
+      "/assets/farida_photo2.jpg",
+      "/assets/farida_photo3.jpg",
+      "/assets/farida_photo4.jpg",
+      "/assets/pink-plaid-bg.jpg",
+      "/assets/spotify-icon.png",
+      "/assets/cassette.png",
+      "/assets/spotify-frame.jpg",
+      "/assets/snoopy.png",
+      "/assets/parisian-lamp.png",
+      "/assets/envelope-transparent.png",
+      "/assets/nick-left.png",
+      "/assets/judy-right.png",
+    ];
+
     let loaded = 0;
-    images.forEach((src) => {
+    const checkDone = () => {
+      loaded++;
+      if (loaded >= criticalImages.length) {
+        setTimeout(() => setIsLoading(false), 200);
+        // Trigger background preloading of secondary assets
+        setTimeout(() => {
+          secondaryImages.forEach((src) => {
+            const img = new window.Image();
+            img.src = src;
+          });
+        }, 100);
+      }
+    };
+
+    criticalImages.forEach((src) => {
       const img = new window.Image();
-      img.onload = () => {
-        loaded++;
-        if (loaded >= images.length) {
-          setTimeout(() => setIsLoading(false), 300);
-        }
-      };
-      img.onerror = () => {
-        loaded++;
-        if (loaded >= images.length) {
-          setTimeout(() => setIsLoading(false), 300);
-        }
-      };
+      img.onload = checkDone;
+      img.onerror = checkDone;
       img.src = src;
     });
 
-    // Fallback timeout - don't wait longer than 2s
-    setTimeout(() => setIsLoading(false), 2000);
+    // Fallback timeout - don't wait longer than 1.5s
+    setTimeout(() => {
+      setIsLoading(false);
+      secondaryImages.forEach((src) => {
+        const img = new window.Image();
+        img.src = src;
+      });
+    }, 1500);
   }, []);
 
   const handleGiftOpened = () => {
