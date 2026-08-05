@@ -64,11 +64,13 @@ export default function ScrapbookScene() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
+          {/* ⬇️ [عنوان سكشن الأغنية - غيّريه لأي كلام تحبيه] */}
           <h2 className="text-4xl md:text-6xl font-[family-name:var(--font-playfair)] italic text-[#b92b3a] drop-shadow-sm">
-            The Soundtrack of Us
+            Our Song, Our Story
           </h2>
+          {/* ⬇️ [وصف سكشن الأغنية - غيّريه لأي كلام تحبيه] */}
           <p className="text-[#5A3E2B] mt-5 text-base md:text-xl font-[family-name:var(--font-playfair)] italic max-w-3xl mx-auto px-4 font-medium leading-relaxed drop-shadow-sm">
-            Every beautiful memory we have has its own special melody. This is the one that always reminds me of your beautiful smile and the warmth of your heart.
+            Every friendship has that one song that takes you right back to the laughs, the late-night talks, and the moments that made us, us. Hit play and let the memories flood in.
           </p>
         </motion.div>
 
