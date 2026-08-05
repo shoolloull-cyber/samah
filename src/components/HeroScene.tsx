@@ -29,16 +29,20 @@ interface FlowerParticle {
 function createFlowerParticle(
   x: number, y: number, delay: number, screenW: number, screenH: number
 ): FlowerParticle {
+  const isMobile = screenW < 768;
+  const minSize = isMobile ? 55 : 85;
+  const maxSizeRange = isMobile ? 65 : 105;
+
   return {
     x, y, delay, active: false,
     imageIndex: Math.floor(Math.random() * 3),
-    targetX: (Math.random() - 0.5) * (screenW * 1.6) + screenW * 0.5,
-    targetY: (Math.random() - 0.5) * (screenH * 1.6) + screenH * 0.5,
-    ease: Math.random() * 0.03 + 0.02,
+    targetX: (Math.random() - 0.5) * (screenW * 1.5) + screenW * 0.5,
+    targetY: (Math.random() - 0.5) * (screenH * 1.5) + screenH * 0.5,
+    ease: Math.random() * 0.045 + 0.045, // Smooth & balanced burst speed across devices
     size: 0,
-    targetSize: Math.random() * 180 + 100,
+    targetSize: Math.random() * maxSizeRange + minSize,
     rotation: Math.random() * Math.PI * 2,
-    rotationSpeed: (Math.random() - 0.5) * 0.1,
+    rotationSpeed: (Math.random() - 0.5) * 0.12,
     opacity: 0,
     vy: 0,
   };
@@ -49,9 +53,9 @@ function updateFlowerParticle(p: FlowerParticle) {
   p.active = true;
   p.x += (p.targetX - p.x) * p.ease;
   p.y += (p.targetY - p.y) * p.ease;
-  p.size += (p.targetSize - p.size) * 0.05;
+  p.size += (p.targetSize - p.size) * 0.1;
   p.rotation += p.rotationSpeed;
-  if (p.opacity < 1) p.opacity += 0.08;
+  if (p.opacity < 1) p.opacity += 0.15;
 }
 
 // ===================== CONFETTI PARTICLES =====================
@@ -403,14 +407,14 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
       ? boxEl.getBoundingClientRect().top + boxEl.getBoundingClientRect().height / 2
       : window.innerHeight / 2;
 
-    // Optimized particle count based on screen size (160 mobile / 400 desktop)
+    // Responsive particle count and immediate burst delay for all screen sizes
     const isMobile = window.innerWidth < 768;
-    const totalParticles = isMobile ? 160 : 400;
+    const totalParticles = isMobile ? 180 : 350;
     const screenW = window.innerWidth;
     const screenH = window.innerHeight;
     const particles: FlowerParticle[] = [];
     for (let i = 0; i < totalParticles; i++) {
-      particles.push(createFlowerParticle(startX, startY, Math.floor(Math.random() * 50), screenW, screenH));
+      particles.push(createFlowerParticle(startX, startY, Math.floor(Math.random() * 16), screenW, screenH));
     }
     flowerParticlesRef.current = particles;
     animateFlowers();
