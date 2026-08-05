@@ -55,7 +55,7 @@ export default function ScrapbookScene() {
       <Sparkles count={25} colors={["#D7B36A", "#fff", "rgba(255,255,255,0.5)"]} />
 
       <div className="max-w-6xl w-full mx-auto relative z-10 flex flex-col items-center gap-16 md:gap-24">
-        
+
         {/* Section Heading */}
         <motion.div
           className="w-full text-center mt-4 md:mt-8 mb-8 md:mb-12 relative z-20"
@@ -76,7 +76,7 @@ export default function ScrapbookScene() {
 
         {/* Top Section: Music Player & Bear */}
         <div className="w-full flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24 relative">
-          
+
           {/* Spotify Icon Decoration */}
           <motion.div
             className="absolute top-[-15%] left-[-5%] md:top-[5%] md:left-[-120px] lg:left-[-220px] z-0 pointer-events-none"
@@ -118,7 +118,7 @@ export default function ScrapbookScene() {
             {...slideIn("left", 0.2)}
             className="w-[280px] sm:w-[320px] relative z-30 drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)] rotate-[-2deg]"
           >
-            <Image 
+            <Image
               src="/assets/spotify-frame.jpg"
               alt="Music Player Frame"
               width={468}
@@ -126,17 +126,17 @@ export default function ScrapbookScene() {
               className="w-full h-auto object-contain rounded-xl"
               priority
             />
-            
+
             {/* ⬇️ [تعديل رابط فيديو يوتيوب / الأغنية داخل مشغل الموسيقى] */}
             {/* لتغيير الأغنية: انسخ الـ ID الخاص بالفيديو من رابط يوتيوب وضعه مكان MrmPDUvKyLs */}
             <div className="absolute top-[8%] left-[8%] right-[8%] bottom-[32%] overflow-hidden rounded-[2px] bg-black">
-              <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/MrmPDUvKyLs?autoplay=0&controls=1&rel=0&showinfo=0" 
-                title="Special Birthday Song" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/2Qp4hkdBJAQ?autoplay=0&controls=1&rel=0&showinfo=0"
+                title="Special Birthday Song"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="absolute inset-0 w-full h-full pointer-events-auto"
               ></iframe>
@@ -145,7 +145,7 @@ export default function ScrapbookScene() {
             {/* ⬇️ [تعديل اسم الأغنية واسم المغني المعروض تحت مشغل الموسيقى] */}
             <div className="absolute top-[71.5%] left-0 right-0 text-center px-4 pointer-events-none">
               <h3 className="text-[#202020] font-bold text-lg leading-tight mb-[1px]" style={{ fontFamily: "var(--font-playfair)" }}>Favorite Song</h3>
-              <p className="text-[#505050] text-xs font-medium">For Farida</p>
+              <p className="text-[#505050] text-xs font-medium">For samah</p>
             </div>
           </motion.div>
 

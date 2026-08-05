@@ -112,7 +112,7 @@ export default function LetterScene() {
               <div className="paper-texture rounded-lg p-6 md:p-10 shadow-2xl relative overflow-hidden bg-[#fdfaf5]">
                 {/* Subtle fold line */}
                 <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-[#c9b896]/30" />
-                
+
                 {/* ⬇️ [تعديل اسم الراسل والمستقبل للرسالة] */}
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -120,8 +120,8 @@ export default function LetterScene() {
                   transition={{ delay: 0.3 }}
                 >
                   <div className="flex justify-between text-sm md:text-lg text-[#8B6E5A]/70 font-[family-name:var(--font-inter)] mb-6">
-                    <span>From: <strong className="text-[#8B6E5A]">safaa</strong></span>
-                    <span>For: <strong className="text-[#8B6E5A]">farida</strong></span>
+                    <span>From: <strong className="text-[#8B6E5A]">Arwa</strong></span>
+                    <span>For: <strong className="text-[#8B6E5A]">Samah</strong></span>
                   </div>
                 </motion.div>
 
@@ -134,23 +134,11 @@ export default function LetterScene() {
                   transition={{ delay: 0.6, duration: 1 }}
                 >
                   <p className="font-[family-name:var(--font-playfair)] italic text-xl md:text-3xl text-[#8B0A1E]">
-                    Happy birthday favorite 🎂❤️
+                    Happy birthday Samah 🎂❤️
                   </p>
-                  <p>
-                    you know how much you mean to me, I really love you so much. I hope we always stay together like we did in primary and prep school, and now it’s our last year of high school.
-                  </p>
-                  <p>
-                    I hope we get into the university we always wanted together and I get to see you become the best one in the world.
-                  </p>
-                  <p>
-                    I hope we always stay friends, you come to my wedding and I come to yours and Youssef’s 😂.
-                  </p>
-                  <p>
-                    I hope you’re always happy, successful and achieve everything you want, and always be okay without any pressure. God keep you for me always.
-                  </p>
-                  <p>
-                    You really don’t know how much you mean to me, you understand me from just one look and there are so few people who get me like you do, and that’s why I love spending my time with you ❤️💋
-                  </p>
+                  <p>Happy Birthday to the most precious one in my life❤️ I don't think I'll ever find enough words to explain how much you truly mean to me but Thank you for being the kind of friend who makes life feel easier without even trying your presence has a way of making everything better. Every time we're together the simplest moments somehow become my favorite memories every laugh feels louder, every conversation feels more meaningful and every place becomes more special just because you're there.</p>
+
+                  <p>Honestly i can't imagine my days without you. No matter what I'm going through knowing that I have you beside me gives me so much comfort you've always been someone I can lean on, someone who listens without judging, supports me without hesitation and reminds me that I'm never alone. Thank you for every memory we've made together, for every time you've made me smile when I needed it the most, for every piece of advice, every laugh, every random conversation, and every moment that reminded me how lucky I am to have you in my life. I hope we never lose what we have, I hope years from now we're still making memories together, laughing over the same silly things, supporting each other through every new chapter, and celebrating every thing side by side.I hope this year brings you endless happiness, success in everything you dream of I love you, always. ❤️</p>
                 </motion.div>
 
                 {/* Decorative hearts */}

@@ -17,7 +17,7 @@ const inter = Inter({
 
 // ⬇️ [تعديل العنوان الأساسي للصفحة الذي يظهر في أعلى المتصفح (Tab Title)]
 export const metadata: Metadata = {
-  title: "For Farida 💝 | Happy Birthday Favorite",
+  title: "For Samah 💝 | Happy Birthday Samah",
   description: "A special animated letter and scrapbook",
 };
 

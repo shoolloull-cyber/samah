@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function FlowerBurstScene() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
@@ -75,7 +75,7 @@ export default function FlowerBurstScene() {
 
       {/* Main Content */}
       <div className="relative z-10 w-full min-h-screen py-24 flex flex-col justify-center items-center">
-        
+
         {/* Header and Camera Container */}
         <div className="relative w-full px-4 md:px-20 pt-16 md:pt-20 flex flex-col md:flex-row items-center justify-center md:justify-around gap-10 z-20">
           <motion.div
@@ -86,7 +86,7 @@ export default function FlowerBurstScene() {
             transition={{ duration: 1 }}
           >
             <h2 className="text-4xl md:text-5xl font-[family-name:var(--font-playfair)] italic text-white/90"
-                style={{ textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}>
+              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}>
               Our beautiful moments
             </h2>
             <p className="text-[#D7B36A] font-[family-name:var(--font-inter)] mt-2 tracking-widest text-sm uppercase">
@@ -116,7 +116,7 @@ export default function FlowerBurstScene() {
         </div>
 
         {/* Clothesline Container */}
-        <motion.div 
+        <motion.div
           className="relative w-full max-w-[1400px] mx-auto min-h-[950px] md:min-h-[750px] mt-16 md:mt-32 pb-20"
           style={{ y: stringY }}
         >
@@ -140,7 +140,7 @@ export default function FlowerBurstScene() {
 
           {/* Photos hanging from string */}
           <div className="absolute top-0 w-full grid grid-cols-2 md:flex md:flex-nowrap justify-center md:justify-around px-3 md:px-8 gap-x-4 md:gap-x-8 gap-y-[150px] md:gap-y-0 place-items-center">
-            
+
             {/* Photo 1 */}
             <motion.div
               className="relative w-[155px] h-[260px] sm:w-[170px] sm:h-[290px] md:w-[240px] md:h-[420px] mt-2 md:mt-4"
@@ -159,7 +159,7 @@ export default function FlowerBurstScene() {
                   <circle cx="12" cy="11" r="2" fill="#8a6030" />
                 </svg>
               </div>
-              
+
               {/* Polaroid frame */}
               <div className="w-full h-full bg-white p-2 pb-8 md:p-3 md:pb-14 shadow-2xl rounded-sm border border-gray-100 flex flex-col">
                 <div className="w-full flex-1 rounded-sm overflow-hidden relative">
@@ -172,7 +172,7 @@ export default function FlowerBurstScene() {
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
-                  my soulmate & best friend 🌸
+                  Shining bright together ✨🌙
                 </p>
               </div>
             </motion.div>
@@ -194,7 +194,7 @@ export default function FlowerBurstScene() {
                   <circle cx="12" cy="11" r="2" fill="#8a6030" />
                 </svg>
               </div>
-              
+
               <div className="w-full h-full bg-white p-2 pb-8 md:p-3 md:pb-14 shadow-2xl rounded-sm border border-gray-100 flex flex-col">
                 <div className="w-full flex-1 rounded-sm overflow-hidden relative">
                   <Image
@@ -206,8 +206,7 @@ export default function FlowerBurstScene() {
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
-                  partners in crime ✌️✨
-                </p>
+                  Best teammate ever! ⚽️❤️                </p>
               </div>
             </motion.div>
 
@@ -228,7 +227,7 @@ export default function FlowerBurstScene() {
                   <circle cx="12" cy="11" r="2" fill="#8a6030" />
                 </svg>
               </div>
-              
+
               <div className="w-full h-full bg-white p-2 pb-8 md:p-3 md:pb-14 shadow-2xl rounded-sm border border-gray-100 flex flex-col">
                 <div className="w-full flex-1 rounded-sm overflow-hidden relative">
                   <Image
@@ -240,7 +239,7 @@ export default function FlowerBurstScene() {
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
-                  forever & always 🤍
+                  Unplanned & iconically us 🤪📸
                 </p>
               </div>
             </motion.div>
@@ -262,7 +261,7 @@ export default function FlowerBurstScene() {
                   <circle cx="12" cy="11" r="2" fill="#8a6030" />
                 </svg>
               </div>
-              
+
               <div className="w-full h-full bg-white p-2 pb-8 md:p-3 md:pb-14 shadow-2xl rounded-sm border border-gray-100 flex flex-col">
                 <div className="w-full flex-1 rounded-sm overflow-hidden relative">
                   <Image
@@ -274,7 +273,7 @@ export default function FlowerBurstScene() {
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
-                  precious memories together 🌷
+                  forever & always 🤍
                 </p>
               </div>
             </motion.div>

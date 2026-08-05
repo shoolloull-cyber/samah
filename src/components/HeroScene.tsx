@@ -242,7 +242,7 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
     if (!showHappyBirthday) return;
 
     const full1 = "HAPPY BIRTHDAY";
-    const full2 = "FAVORITE";
+    const full2 = "SAMAH";
     let i1 = 0;
     let i2 = 0;
 
@@ -509,7 +509,7 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            For Farida
+            For samah
           </motion.h1>
         )}
       </AnimatePresence>
