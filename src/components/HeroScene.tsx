@@ -30,19 +30,19 @@ function createFlowerParticle(
   x: number, y: number, delay: number, screenW: number, screenH: number
 ): FlowerParticle {
   const isMobile = screenW < 768;
-  const minSize = isMobile ? 55 : 85;
-  const maxSizeRange = isMobile ? 65 : 105;
+  const minSize = isMobile ? 95 : 110;
+  const maxSizeRange = isMobile ? 140 : 180;
 
   return {
     x, y, delay, active: false,
     imageIndex: Math.floor(Math.random() * 3),
-    targetX: (Math.random() - 0.5) * (screenW * 1.5) + screenW * 0.5,
-    targetY: (Math.random() - 0.5) * (screenH * 1.5) + screenH * 0.5,
-    ease: Math.random() * 0.045 + 0.045, // Smooth & balanced burst speed across devices
+    targetX: (Math.random() - 0.5) * (screenW * 1.3) + screenW * 0.5,
+    targetY: (Math.random() - 0.5) * (screenH * 1.3) + screenH * 0.5,
+    ease: Math.random() * 0.035 + 0.035, // Smooth, natural burst speed
     size: 0,
-    targetSize: Math.random() * maxSizeRange + minSize,
+    targetSize: Math.random() * maxSizeRange + minSize, // Large dense flowers (no gaps)
     rotation: Math.random() * Math.PI * 2,
-    rotationSpeed: (Math.random() - 0.5) * 0.12,
+    rotationSpeed: (Math.random() - 0.5) * 0.1,
     opacity: 0,
     vy: 0,
   };
@@ -53,9 +53,9 @@ function updateFlowerParticle(p: FlowerParticle) {
   p.active = true;
   p.x += (p.targetX - p.x) * p.ease;
   p.y += (p.targetY - p.y) * p.ease;
-  p.size += (p.targetSize - p.size) * 0.1;
+  p.size += (p.targetSize - p.size) * 0.08;
   p.rotation += p.rotationSpeed;
-  if (p.opacity < 1) p.opacity += 0.15;
+  if (p.opacity < 1) p.opacity += 0.12;
 }
 
 // ===================== CONFETTI PARTICLES =====================
@@ -407,9 +407,9 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
       ? boxEl.getBoundingClientRect().top + boxEl.getBoundingClientRect().height / 2
       : window.innerHeight / 2;
 
-    // Responsive particle count and immediate burst delay for all screen sizes
+    // High-density particle count for lush, gapless flower coverage
     const isMobile = window.innerWidth < 768;
-    const totalParticles = isMobile ? 180 : 350;
+    const totalParticles = isMobile ? 260 : 420;
     const screenW = window.innerWidth;
     const screenH = window.innerHeight;
     const particles: FlowerParticle[] = [];
