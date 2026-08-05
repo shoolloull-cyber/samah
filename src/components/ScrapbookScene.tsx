@@ -143,7 +143,7 @@ export default function ScrapbookScene() {
             {/* ⬇️ [تعديل اسم الأغنية واسم المغني المعروض تحت مشغل الموسيقى] */}
             <div className="absolute top-[71.5%] left-0 right-0 text-center px-4 pointer-events-none">
               <h3 className="text-[#202020] font-bold text-lg leading-tight mb-[1px]" style={{ fontFamily: "var(--font-playfair)" }}>Favorite Song</h3>
-              <p className="text-[#505050] text-xs font-medium">For Farida 🎵</p>
+              <p className="text-[#505050] text-xs font-medium">For Farida</p>
             </div>
           </motion.div>
 

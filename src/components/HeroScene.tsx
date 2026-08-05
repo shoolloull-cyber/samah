@@ -214,6 +214,10 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
   const [boxFading, setBoxFading] = useState(false);
   const [boxHidden, setBoxHidden] = useState(false);
 
+  // Smooth Typewriter State (Zero Layout Shift)
+  const [typed1, setTyped1] = useState("");
+  const [typed2, setTyped2] = useState("");
+
   // Flower refs
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const flowerParticlesRef = useRef<FlowerParticle[]>([]);
@@ -227,23 +231,47 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
   const confettiAnimRef = useRef<number>(0);
   const confettiFiredRef = useRef(false);
 
-  // Timing constants (responsive)
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const slowFactor = isMobile ? 1.5 : 1.0;
-  const delayFactor = isMobile ? 1.2 : 1.0;
-
-  // ⬇️ [تعديل حساب توقيت التأثير عند تغيير الكلمة السطر الثاني]
-  const TYPING_LINE1 = "happy birthday".length * 0.1 * slowFactor;
-  const TYPING_PAUSE = 0.4 * slowFactor;
-  const TYPING_LINE2 = "favorite".length * 0.15 * slowFactor;
-  const CAT_DELAY_AFTER_TYPING = 0.5 * slowFactor;
-  const TOTAL_TYPING_TIME = (TYPING_LINE1 + TYPING_PAUSE + TYPING_LINE2 + CAT_DELAY_AFTER_TYPING) * 1000;
-
-  // Show "For Ahmed" text after a delay
+  // Show "For Farida" text after a delay
   useEffect(() => {
     const timer = setTimeout(() => setShowText(true), 800);
     return () => clearTimeout(timer);
   }, []);
+
+  // Ultra-Smooth 60FPS Typewriter Engine
+  useEffect(() => {
+    if (!showHappyBirthday) return;
+
+    const full1 = "HAPPY BIRTHDAY";
+    const full2 = "FAVORITE";
+    let i1 = 0;
+    let i2 = 0;
+
+    const timer1 = setInterval(() => {
+      if (i1 <= full1.length) {
+        setTyped1(full1.slice(0, i1));
+        i1++;
+      } else {
+        clearInterval(timer1);
+        setTimeout(() => {
+          const timer2 = setInterval(() => {
+            if (i2 <= full2.length) {
+              setTyped2(full2.slice(0, i2));
+              i2++;
+            } else {
+              clearInterval(timer2);
+              setTimeout(() => {
+                setShowCat(true);
+              }, 400);
+            }
+          }, 100);
+        }, 250);
+      }
+    }, 85);
+
+    return () => {
+      clearInterval(timer1);
+    };
+  }, [showHappyBirthday]);
 
   // Preload flower images
   useEffect(() => {
@@ -290,7 +318,7 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
       const p = particles[i];
       updateFlowerParticle(p);
       if (isFallingRef.current) {
-        p.vy += 0.8 + Math.random() * 0.5; // Add slightly randomized gravity
+        p.vy += 0.8 + Math.random() * 0.5;
         p.y += p.vy;
       }
       if (!p.active) continue;
@@ -325,65 +353,35 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
     }
   }, []);
 
-  // Fire confetti burst
+  // Fire confetti burst (optimized count for smooth performance)
   const fireConfetti = useCallback(() => {
     if (confettiFiredRef.current) return;
     confettiFiredRef.current = true;
 
+    const isMobile = window.innerWidth < 768;
     const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight * 0.55; // below text, near cat
+    const centerY = window.innerHeight * 0.55;
+
+    const mainCount = isMobile ? 60 : 120;
+    const sideCount = isMobile ? 25 : 50;
 
     const pieces: ConfettiPiece[] = [];
-    // Main burst from center
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < mainCount; i++) {
       pieces.push(createConfettiPiece(centerX, centerY));
     }
-    // Left burst
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < sideCount; i++) {
       const p = createConfettiPiece(centerX * 0.3, centerY * 0.6);
-      p.vx = Math.abs(p.vx) * 1.2; // push right
+      p.vx = Math.abs(p.vx) * 1.2;
       pieces.push(p);
     }
-    // Right burst
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < sideCount; i++) {
       const p = createConfettiPiece(centerX * 1.7, centerY * 0.6);
-      p.vx = -Math.abs(p.vx) * 1.2; // push left
-      pieces.push(p);
-    }
-    // Top shower
-    for (let i = 0; i < 80; i++) {
-      const p = createConfettiPiece(Math.random() * window.innerWidth, -20);
-      p.vy = 2 + Math.random() * 4;
-      p.vx = (Math.random() - 0.5) * 6;
+      p.vx = -Math.abs(p.vx) * 1.2;
       pieces.push(p);
     }
 
     confettiRef.current = pieces;
     animateConfetti();
-
-    // Second wave after 300ms
-    setTimeout(() => {
-      const wave2: ConfettiPiece[] = [];
-      for (let i = 0; i < 80; i++) {
-        wave2.push(createConfettiPiece(centerX, centerY - 50));
-      }
-      for (let i = 0; i < 50; i++) {
-        const p = createConfettiPiece(Math.random() * window.innerWidth, -10);
-        p.vy = 3 + Math.random() * 5;
-        p.vx = (Math.random() - 0.5) * 8;
-        wave2.push(p);
-      }
-      confettiRef.current = [...confettiRef.current, ...wave2];
-    }, 300);
-
-    // Third smaller wave
-    setTimeout(() => {
-      const wave3: ConfettiPiece[] = [];
-      for (let i = 0; i < 50; i++) {
-        wave3.push(createConfettiPiece(centerX + (Math.random() - 0.5) * 400, centerY));
-      }
-      confettiRef.current = [...confettiRef.current, ...wave3];
-    }, 700);
   }, [animateConfetti]);
 
   // Trigger confetti when cat appears
@@ -393,18 +391,10 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
     }
   }, [showCat, fireConfetti]);
 
-  // Show cat after typing finishes
-  useEffect(() => {
-    if (!showHappyBirthday) return;
-    const timer = setTimeout(() => setShowCat(true), TOTAL_TYPING_TIME);
-    return () => clearTimeout(timer);
-  }, [showHappyBirthday, TOTAL_TYPING_TIME]);
-
   const handleGiftClick = () => {
     if (isClicked) return;
     setIsClicked(true);
 
-    // Get box position
     const boxEl = document.getElementById("hero-gift-box");
     const startX = boxEl
       ? boxEl.getBoundingClientRect().left + boxEl.getBoundingClientRect().width / 2
@@ -413,23 +403,23 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
       ? boxEl.getBoundingClientRect().top + boxEl.getBoundingClientRect().height / 2
       : window.innerHeight / 2;
 
-    // Create 800 flower particles for full screen coverage
+    // Optimized particle count based on screen size (160 mobile / 400 desktop)
+    const isMobile = window.innerWidth < 768;
+    const totalParticles = isMobile ? 160 : 400;
     const screenW = window.innerWidth;
     const screenH = window.innerHeight;
     const particles: FlowerParticle[] = [];
-    for (let i = 0; i < 800; i++) {
-      particles.push(createFlowerParticle(startX, startY, Math.floor(Math.random() * 70), screenW, screenH));
+    for (let i = 0; i < totalParticles; i++) {
+      particles.push(createFlowerParticle(startX, startY, Math.floor(Math.random() * 50), screenW, screenH));
     }
     flowerParticlesRef.current = particles;
     animateFlowers();
 
-    // Start fading box and make flowers fall at 4.5s (adjusted by delayFactor)
     setTimeout(() => {
       setBoxFading(true);
       isFallingRef.current = true;
-    }, 4500 * delayFactor);
+    }, 3800);
 
-    // Hide flowers and box at 5.7s, THEN start typing
     setTimeout(() => {
       setBoxHidden(true);
       cancelAnimationFrame(flowerAnimRef.current);
@@ -438,24 +428,21 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
         const ctx = canvas.getContext("2d");
         if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
-      // Now show the typewriter text
       setShowHappyBirthday(true);
-    }, 5700 * delayFactor);
+    }, 4800);
 
-    // Trigger parent callback and auto-scroll after everything completes
     setTimeout(() => {
       onGiftOpened();
-      // Scroll immediately after since components are already fully rendered
       setTimeout(() => {
         const scrollOffset = window.innerWidth < 768 ? 50 : 250;
         window.scrollTo({ top: window.innerHeight + scrollOffset, behavior: "smooth" });
       }, 100);
-    }, 5700 * delayFactor + TOTAL_TYPING_TIME + 1200 * delayFactor);
+    }, 7800);
   };
 
   return (
     <section className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0B2046]">
-      <Sparkles count={20} colors={["rgba(215,179,106,0.4)", "rgba(255,255,255,0.2)"]} />
+      <Sparkles count={15} colors={["rgba(215,179,106,0.4)", "rgba(255,255,255,0.2)"]} />
 
       {/* Canvas for flower explosion */}
       <canvas
@@ -482,13 +469,12 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
             transition: "transform 1.2s cubic-bezier(0.55, 0.085, 0.68, 0.53), opacity 1.2s ease-in",
           }}
         >
-          {/* Gift box image */}
           <motion.img
             id="hero-gift-box"
             src={isClicked ? "/assets/gift-box-after.png" : "/assets/gift-box-before.png"}
             alt="Gift Box"
             className="relative"
-            style={{ width: "250px", filter: "drop-shadow(0 10px 15px rgba(0,0,0,0.2))" }}
+            style={{ width: "230px", filter: "drop-shadow(0 10px 15px rgba(0,0,0,0.2))" }}
             animate={
               !isClicked
                 ? { x: [1, -2, -4, 4, 2, -2, -4, 4, -2, 2, 2], y: [1, -3, 0, 3, -2, 3, 2, 2, -2, 3, -3], rotate: [0, -1, 2, 0, 2, -1, 0, -2, 2, 0, -1] }
@@ -501,7 +487,6 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
             }
           />
 
-          {/* Instruction text */}
           {!isClicked && (
             <motion.p
               className="mt-6 text-lg md:text-xl font-semibold z-20"
@@ -515,7 +500,6 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
         </div>
       )}
 
-      {/* ⬇️ [تعديل النص تحت صندوق الهدية قبل الفتح] */}
       <AnimatePresence>
         {showText && !isClicked && (
           <motion.h1
@@ -530,91 +514,57 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
         )}
       </AnimatePresence>
 
-      {/* Happy Birthday Text - typewriter style (starts AFTER flowers fade) */}
+      {/* High Performance 60FPS Typewriter Header */}
       <AnimatePresence>
         {showHappyBirthday && (
           <motion.div
             className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
           >
             <div className="flex flex-col items-center justify-center gap-3 md:gap-5">
-              {/* Typewriter text */}
               <div
                 className="text-3xl sm:text-4xl md:text-6xl font-[family-name:var(--font-inter)] font-semibold tracking-wide text-[#f8e5b6] uppercase text-center"
                 style={{ textShadow: "0 4px 30px rgba(0,0,0,0.8)" }}
               >
-                {/* ⬇️ [تعديل السطر الأول من نص التهنيئة - HAPPY BIRTHDAY] */}
-                <div className="flex justify-center items-center flex-wrap">
-                  {"happy birthday".split("").map((char, index) => (
-                    <motion.span
-                      key={`hb-${index}`}
-                      initial={{ opacity: 0, display: "none" }}
-                      animate={{ opacity: 1, display: "inline-block" }}
-                      transition={{ delay: index * 0.13, duration: 0.05 }}
-                      style={{ display: "inline-block" }}
-                    >
-                      {char === " " ? "\u00A0" : char}
-                    </motion.span>
-                  ))}
-                  {/* Blinking cursor */}
-                  <motion.span
-                    className="inline-block w-[3px] h-[0.9em] bg-[#f8e5b6] ml-1 align-middle"
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  />
+                {/* Line 1: HAPPY BIRTHDAY */}
+                <div className="flex justify-center items-center">
+                  <span>{typed1}</span>
+                  {typed1.length < 14 && (
+                    <span className="inline-block w-[3px] h-[0.9em] bg-[#f8e5b6] ml-1 align-middle animate-pulse" />
+                  )}
                 </div>
 
-                {/* ⬇️ [تعديل السطر الثاني من نص التهنيئة - FAVORITE] */}
-                <div className="flex justify-center items-center flex-wrap mt-1 md:mt-2 text-3xl sm:text-4xl md:text-6xl text-[#D7B36A]">
-                  {"favorite".split("").map((char, index) => {
-                    const totalDelay = TYPING_LINE1 + TYPING_PAUSE + (index * 0.2);
-                    return (
-                    <motion.span
-                        key={`j-${index}`}
-                        initial={{ opacity: 0, display: "none" }}
-                        animate={{ opacity: 1, display: "inline-block" }}
-                        transition={{ delay: totalDelay, duration: 0.05 }}
-                        style={{ display: "inline-block" }}
-                      >
-                        {char}
-                      </motion.span>
-                    );
-                  })}
-                  {/* Blinking cursor */}
-                  <motion.span
-                    className="inline-block w-[3px] h-[0.9em] bg-[#D7B36A] ml-1 align-middle"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{ delay: TYPING_LINE1 + TYPING_PAUSE, duration: 0.8, repeat: Infinity }}
-                  />
+                {/* Line 2: FAVORITE */}
+                <div className="flex justify-center items-center mt-1 md:mt-2 text-3xl sm:text-4xl md:text-6xl text-[#D7B36A]">
+                  <span>{typed2}</span>
+                  {typed1.length >= 14 && !showCat && (
+                    <span className="inline-block w-[3px] h-[0.9em] bg-[#D7B36A] ml-1 align-middle animate-pulse" />
+                  )}
                 </div>
               </div>
 
-              {/* Birthday cat image - appears after typing with confetti */}
+              {/* Birthday Cat Image */}
               <AnimatePresence>
                 {showCat && (
                   <motion.div
                     className="flex justify-center items-center relative"
-                    initial={{ opacity: 0, scale: 0, y: 40 }}
+                    initial={{ opacity: 0, scale: 0, y: 30 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{
-                      duration: window.innerWidth < 768 ? 1.5 : 1,
+                      duration: 0.8,
                       type: "spring",
-                      stiffness: 100,
-                      damping: 8,
+                      stiffness: 120,
+                      damping: 10,
                     }}
                   >
-                    {/* Glow behind cat */}
-                    <motion.div
+                    <div
                       className="absolute rounded-full pointer-events-none"
                       style={{
                         background: "radial-gradient(circle, rgba(255,215,0,0.25) 0%, transparent 70%)",
-                        width: "300px", height: "300px",
+                        width: "280px", height: "280px",
                       }}
-                      animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }}
-                      transition={{ duration: 2, repeat: Infinity }}
                     />
                     <img
                       src="/assets/birthday-cat-hat.png"

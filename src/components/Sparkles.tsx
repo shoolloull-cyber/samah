@@ -36,19 +36,21 @@ function Sparkle({ delay, color, size, x, y }: { delay: number; color: string; s
   );
 }
 
-export default function Sparkles({ count = 30, colors = ["#D7B36A", "#fff", "#F8D7DA", "#E9A5B5"] }: SparkleProps) {
+export default function Sparkles({ count = 16, colors = ["#D7B36A", "#fff", "#F8D7DA", "#E9A5B5"] }: SparkleProps) {
   const [sparkles, setSparkles] = useState<any[]>([]);
   const colorsRef = React.useRef(colors);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    const actualCount = isMobile ? Math.min(count, 10) : count;
     const c = colorsRef.current;
     setSparkles(
-      Array.from({ length: count }, (_, i) => ({
+      Array.from({ length: actualCount }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: 2 + Math.random() * 4,
-        delay: Math.random() * 5,
+        size: 2 + Math.random() * 3,
+        delay: Math.random() * 4,
         color: c[Math.floor(Math.random() * c.length)],
       }))
     );
@@ -57,7 +59,7 @@ export default function Sparkles({ count = 30, colors = ["#D7B36A", "#fff", "#F8
   if (sparkles.length === 0) return null;
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ transform: "translateZ(0)" }}>
       {sparkles.map((s) => (
         <Sparkle key={s.id} delay={s.delay} color={s.color} size={s.size} x={s.x} y={s.y} />
       ))}

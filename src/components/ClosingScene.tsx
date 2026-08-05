@@ -50,7 +50,7 @@ export default function ClosingScene() {
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           <h2 className="text-4xl md:text-6xl font-[family-name:var(--font-playfair)] italic text-[#b92b3a]">
-            Partners in Crime, Always & Forever
+            Partners in Laughter, Best Friends Forever
           </h2>
         </motion.div>
       </div>
