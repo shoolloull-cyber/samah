@@ -280,13 +280,6 @@ export default function FlowerBurstScene() {
             </motion.div>
 
           </div>
-        </motion.div>       <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
-                  precious memories together 🌷
-                </p>
-              </div>
-            </motion.div>
-
-          </div>
         </motion.div>
 
       </div>
