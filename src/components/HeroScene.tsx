@@ -237,7 +237,7 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Ultra-Smooth 60FPS Typewriter Engine
+  // Ultra-Smooth 60FPS Typewriter Engine (Cinematic Speed)
   useEffect(() => {
     if (!showHappyBirthday) return;
 
@@ -261,12 +261,12 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
               clearInterval(timer2);
               setTimeout(() => {
                 setShowCat(true);
-              }, 400);
+              }, 1000);
             }
-          }, 100);
-        }, 250);
+          }, 180);
+        }, 600);
       }
-    }, 85);
+    }, 140);
 
     return () => {
       clearInterval(timer1);
@@ -437,7 +437,7 @@ export default function HeroScene({ onGiftOpened }: HeroSceneProps) {
         const scrollOffset = window.innerWidth < 768 ? 50 : 250;
         window.scrollTo({ top: window.innerHeight + scrollOffset, behavior: "smooth" });
       }, 100);
-    }, 7800);
+    }, 11000);
   };
 
   return (

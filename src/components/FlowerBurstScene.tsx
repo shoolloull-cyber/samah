@@ -172,7 +172,7 @@ export default function FlowerBurstScene() {
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
-                  my soulmate & best friend
+                  my soulmate & best friend 🌸
                 </p>
               </div>
             </motion.div>
@@ -206,7 +206,7 @@ export default function FlowerBurstScene() {
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
-                  best friends forever
+                  partners in crime ✌️✨
                 </p>
               </div>
             </motion.div>
@@ -240,7 +240,7 @@ export default function FlowerBurstScene() {
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
-                  forever & always
+                  forever & always 🤍
                 </p>
               </div>
             </motion.div>
@@ -274,7 +274,7 @@ export default function FlowerBurstScene() {
                   />
                 </div>
                 <p className="mt-1 md:mt-2 w-full text-center text-[#8B6E5A] font-[family-name:var(--font-inter)] text-xs md:text-base font-medium">
-                  precious memories together
+                  precious memories together 🌷
                 </p>
               </div>
             </motion.div>
